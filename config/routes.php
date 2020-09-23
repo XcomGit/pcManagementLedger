@@ -47,21 +47,26 @@ Router::scope('/', function (RouteBuilder $routes) {
     /**
      * 一覧
      */
-    $routes->connect('/', ['controller' => 'List', 'action' => 'index']);
+    $routes->connect('/', ['controller' => 'List', 'action' => 'index', '_method' => 'GET']);
 
     /**
      * 登録
      */
-    $routes->connect('/regist', ['controller' => 'Regist', 'action' => 'index']);
-    $routes->connect('/regist/confirm', ['controller' => 'Regist', 'action' => 'confirm']);
-    $routes->connect('/regist/complete', ['controller' => 'Regist', 'action' => 'complete']);
+    $routes->connect('/regist', ['controller' => 'Regist', 'action' => 'index', '_method' => 'GET']);
+    $routes->connect('/regist/confirm', ['controller' => 'Regist', 'action' => 'confirm', '_method' => 'POST']);
+    $routes->connect('/regist/complete', ['controller' => 'Regist', 'action' => 'complete', '_method' => 'POST']);
 
     /**
      * 変更
      */
-    $routes->connect('/update/:pcNum', ['controller' => 'Update', 'action' => 'index'], ['pcNum' => '\d+', 'pass' => ['pcNum']]);
-    $routes->connect('/update/confirm', ['controller' => 'Update', 'action' => 'confirm']);
-    $routes->connect('/update/complete', ['controller' => 'Update', 'action' => 'complete']);
+    $routes->connect('/update/:pcNum', ['controller' => 'Update', 'action' => 'index', '_method' => 'GET']);
+    $routes->connect('/update/confirm', ['controller' => 'Update', 'action' => 'confirm', '_method' => 'POST']);
+    $routes->connect('/update/complete', ['controller' => 'Update', 'action' => 'complete', '_method' => 'POST']);
+
+    /**
+     * 変更履歴
+     */
+    $routes->connect('/history', ['controller' => 'History', 'action' => 'index', '_method' => 'GET']);
 
     /**
      * Connect catchall routes for all controllers.
