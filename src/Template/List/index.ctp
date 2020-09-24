@@ -15,7 +15,7 @@
         </ul>
     </div>
     <div class="margin_top_bottom">
-        <a href="regist.html" class="btn btn-info">新規登録</a>
+        <a href="/regist" class="btn btn-info">新規登録</a>
     </div>
 </div>
 <div class="container-fluid">
@@ -55,62 +55,28 @@
                 <td nowrap><a href="/update/<?= $data->pc_num ?>"><?= $data->pc_num ?></a></td>
                 <td nowrap><?= $data->staff_id ?></td>
                 <td nowrap><?= $data->getPcStatusJp() ?></td>
+                <td nowrap><?= $data->getdeptJp() ?></td>
+                <td nowrap><?= $data->getStaffGroupJp() ?></td>
+                <td nowrap><?= $data->getStaffPostJp() ?></td>
+                <td nowrap><?= $data->getStaffDeptJp() ?></td>
+                <td nowrap><?= $data->staff_name ?></td>
+                <td nowrap><?= isset($data->retire_day) ? date('Y/m/d', strtotime($data->retire_day)) : '' ?></td>
+                <td nowrap><?= $data->getUseStatusJp() ?></td>
+                <td nowrap><?= $data->usage_detail ?></td>
+                <td nowrap><?= $data->getPcTypeJp() ?></td>
+                <td nowrap><?= $data->getOsJp() ?></td>
+                <td nowrap><?= $data->getEsetJp() ?></td>
+                <td nowrap><?= $data->getAreaJp() ?></td>
+                <td nowrap><?= $data->monitor_num ?></td>
+                <td nowrap><?= $data->pc_model ?></td>
+                <td nowrap><?= isset($data->buy_date) ? date('Y/m/d', strtotime($data->buy_date)) : '' ?></td>
+                <td nowrap><?= isset($data->modify_date) ? date('Y/m/d', strtotime($data->modify_date)) : '' ?></td>
+                <td nowrap><?= $data->checker ?></td>
+                <td><?= $data->remark ?></td>
+                <td id="middle"><a href="/update/<?= $data->pc_num ?>" class="btn btn-success">編集</a></td>
             </tr>
             <?php $count++; ?>
         <?php endforeach; ?>
-            <tr>
-                <td>1</td>
-                <td nowrap><a href="./update.html">ICM-PC033</a></td>
-                <td nowrap>11111</td>
-                <td nowrap>利用中</td>
-                <td nowrap>管理部</td>
-                <td nowrap>ロジスティクスG</td>
-                <td nowrap>その他利用</td>
-                <td nowrap>管理部</td>
-                <td nowrap>テストテスト</td>
-                <td nowrap></td>
-                <td nowrap>個別利用</td>
-                <td>勤怠用</td>
-                <td nowrap>ノート</td>
-                <td nowrap>Win10</td>
-                <td nowrap>〇</td>
-                <td nowrap>本社26F</td>
-                <td nowrap>1</td>
-                <td nowrap>HP ProBook 4740s</td>
-                <td nowrap>2013/12/24</td>
-                <td nowrap>2020/06/22</td>
-                <td nowrap>XX</td>
-                <td>勤怠用ノートPC</td>
-                <td id="middle"><a href="./update.html" class="btn btn-success">編集</a></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td nowrap><a href="./update.html">ICM-PC057</a></td>
-                <td nowrap>22222</td>
-                <td nowrap>利用中</td>
-                <td nowrap>業務部</td>
-                <td nowrap>テクニカルG</td>
-                <td nowrap>その他利用</td>
-                <td nowrap>業務部</td>
-                <td nowrap>テストテスト</td>
-                <td nowrap></td>
-                <td nowrap>個別利用</td>
-                <td>カスタマーTeams用</td>
-                <td nowrap>ノート</td>
-                <td nowrap>Win10</td>
-                <td nowrap>×</td>
-                <td nowrap>本社26F</td>
-                <td nowrap>1</td>
-                <td nowrap>HP ProBook 4740s</td>
-                <td nowrap>2013/12/24</td>
-                <td nowrap>2020/06/22</td>
-                <td nowrap>XX</td>
-                <td>
-                    USBモバイルパートナーの検証のために利用している。
-                    USBモバイルパートナーは、USBの抜き差しが発生するため、USBポートを空けておく運用にす
-                </td>
-                <td id="middle"><a href="./update.html" class="btn btn-success">編集</a></td>
-            </tr>
         </tbody>
     </table>
 </div>
