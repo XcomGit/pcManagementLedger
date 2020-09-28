@@ -16,6 +16,6 @@ class HistoryLogic
     public function getHistory()
     {
         $history = TableRegistry::get('History');
-        return $history->find()->all();
+        return $history->find()->order(['update_date' => 'DESC'])->all();
     }
 }
