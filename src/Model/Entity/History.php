@@ -7,6 +7,6 @@ use Cake\ORM\Entity;
 /**
  * HISTORY Entity
  */
-class PcManagementLedger extends Entity
+class History extends Entity
 {
 }
