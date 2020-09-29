@@ -30,7 +30,7 @@
                 <?php foreach ($history as $data): ?>
                     <tr>
                         <td><?= $count ?></td>
-                        <td nowrap><?= isset($data->update_date) ? date('Y/m/d H:i:s', strtotime($data->update_date)) : '' ?></td>
+                        <td nowrap><?= isset($data->update_date) ? $data->update_date->i18nFormat('yyyy/MM/dd HH:mm:ss') : '' ?></td>
                         <td nowrap><?= $data->update_by ?></td>
                         <td nowrap><?= $data->update_contents ?></td>
                     </tr>
