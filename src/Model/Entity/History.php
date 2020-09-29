@@ -9,4 +9,5 @@ use Cake\ORM\Entity;
  */
 class History extends Entity
 {
+    
 }
