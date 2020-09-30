@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Cake\Core\Configure;
 use App\Model\RegistLogic;
+use App\Model\HistoryLogic;
 
 class RegistController extends AppController
 {
@@ -16,6 +17,7 @@ class RegistController extends AppController
     {
         parent::initialize();
         $this->RegistLogic = new RegistLogic();
+        $this->HistoryLogic = new HistoryLogic();
 
         $pcStatus = Configure::read('pcStatus');
         $this->set('pcStatus', $pcStatus);
@@ -75,6 +77,7 @@ class RegistController extends AppController
         if ($this->request->session()->check('session.data')) {
             $data = $this->request->session()->consume('session.data');
             if($this->RegistLogic->setData($data)){
+                $this->HistoryLogic->setInsertHistory($data);
                 return $this->redirect(['controller' => 'List', 'action' => 'index']);
             }
         }else{

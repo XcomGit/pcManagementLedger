@@ -69,7 +69,9 @@ class UpdateController extends AppController
         // 確認
         if(isset($_POST['delete'])) {
             $oldData = $this->request->session()->consume('session.old_data');
+            $data = $this->request->data;
             if($this->UpdateLogic->deleteData($oldData)){
+                $this->HistoryLogic->setDeleteHistory($data,$oldData);
                 return $this->redirect(['controller' => 'List', 'action' => 'index']);
             }else{
                 return $this->redirect(['action' => 'index']);
@@ -98,7 +100,7 @@ class UpdateController extends AppController
             $data = $this->request->session()->consume('session.data');
             $oldData = $this->request->session()->consume('session.old_data');
             if($this->UpdateLogic->setData($data)){
-                $this->HistoryLogic->setHistory($data, $oldData);
+                $this->HistoryLogic->setUpdateHistory($data, $oldData);
                 return $this->redirect(['controller' => 'List', 'action' => 'index']);
             }
         }else{
@@ -108,9 +110,18 @@ class UpdateController extends AppController
 
     // public function delete()
     // {
-    //     // 削除テスト
+    //     // 削除
+    //     if ($this->request->session()->check('session.data')) {
+    //         $this->request->session()->delete('session.data');
+    //     }
+
     //     $oldData = $this->request->session()->consume('session.old_data');
-    //     $this->UpdateLogic->deleteData($oldData);
-    //     return $this->redirect(['controller' => 'List', 'action' => 'index']);
+    //     $data = $this->request->data;
+    //     if($this->UpdateLogic->deleteData($oldData)){
+    //         $this->HistoryLogic->setDeleteHistory($data,$oldData);
+    //         return $this->redirect(['controller' => 'List', 'action' => 'index']);
+    //     }else{
+    //         return $this->redirect(['action' => 'index']);
+    //     }
     // }
 }

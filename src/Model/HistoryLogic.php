@@ -22,11 +22,28 @@ class HistoryLogic
     }
 
     /**
-     * データを登録
+     * 変更履歴に新規PC番号を登録します
      */
-    public function setHistory($data, $oldData)
+    public function setInsertHistory($data)
     {
-        $format = 'PC番号：%sの内容を以下に変更<br>';
+        $historyTable = TableRegistry::get('History');
+        $history = $historyTable->newEntity();
+
+        $history->update_date = Time::now('Asia/Tokyo');
+        $history->update_by = $data['checker'];
+
+        $format = 'PC番号：「%s」を追加';
+        $history->update_contents = sprintf($format, $data['pc_num']);
+
+        $historyTable->save($history);
+    }
+
+    /**
+     * 変更履歴に更新内容を登録します
+     */
+    public function setUpdateHistory($data, $oldData)
+    {
+        $format = 'PC番号：「%s」の内容を以下に変更<br>';
         $format2 = '%s:「%s」から「%s」<br>';
 
         $historyTable = TableRegistry::get('History');
@@ -48,9 +65,6 @@ class HistoryLogic
         $area = Configure::read('area');
         $columnName = Configure::read('columnName');
 
-        $update = false;
-        $i = 0;
-
         $formValMap = [
             'pc_status' => 'pcStatus',
             'dept' => 'dept',
@@ -64,6 +78,8 @@ class HistoryLogic
             'area' => 'area'
         ];
 
+        $update = false;
+        $i = 0;
         foreach($data as $key => $val){
             if ($data[$key] != $oldData[$key] && isset($formValMap[$key])) {
                 $history->update_contents = $history->update_contents . sprintf($format2, $columnName[$i],  ${$formValMap[$key]}[$oldData[$key]], ${$formValMap[$key]}[$data[$key]]);
@@ -83,5 +99,22 @@ class HistoryLogic
         if($update){
             $historyTable->save($history);
         }
+    }
+
+    /**
+     * 変更履歴に削除PC番号を登録します
+     */
+    public function setDeleteHistory($data,$oldData)
+    {
+        $historyTable = TableRegistry::get('History');
+        $history = $historyTable->newEntity();
+
+        $history->update_date = Time::now('Asia/Tokyo');
+        $history->update_by = $data['updater'];
+
+        $format = 'PC番号：「%s」を削除';
+        $history->update_contents = sprintf($format, $oldData['pc_num']);
+
+        $historyTable->save($history);
     }
 }
